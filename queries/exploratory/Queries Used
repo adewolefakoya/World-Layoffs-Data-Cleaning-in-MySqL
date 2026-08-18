@@ -4,6 +4,32 @@ SELECT
 FROM layoffs_staging2
 WHERE total_laid_off IS NOT NULL
 GROUP BY company
-ORDER BY total_layoffs DESC
+ORDER BY total_layoffs DESC;
 
-*Question answered: Which companies had the highest total number of employees laid off?*
+Question answered: Which companies had the highest total number of employees laid off?
+
+---
+
+SELECT 
+    company,
+    location,
+    industry,
+    total_laid_off,
+    percentage_laid_off
+FROM layoffs_staging2
+WHERE percentage_laid_off = 1
+ORDER BY total_laid_off DESC;
+
+Question answered: Which companies reported eliminating their entire workforce?
+
+---
+
+SELECT 
+    country,
+    SUM(total_laid_off) AS total_layoffs
+FROM layoffs_staging2
+WHERE total_laid_off IS NOT NULL
+GROUP BY country
+ORDER BY total_layoffs DESC;
+
+Question answered: Which countries were most affected?
