@@ -1,10 +1,10 @@
-# [Project Title]
-> *One sentence. What did you analyze, build, or solve - and why does it matter?*
+# World Layoffs Data Analysis
+> *My Sql Data Cleaning & Exploratory Analysis*
 
 ---
 
 ## ⚙️ Project Type Flags
-> *Check what applies. This helps reviewers and collaborators understand the nature of the work at a glance. Delete this block before publishing.*
+
 
 - [x] Exploratory Data Analysis (EDA)
 - [x] SQL Analysis / Querying
@@ -17,11 +17,10 @@
 3. [Project Scope & Tools](#3-project-scope--tools)
 4. [Data Workflow](#5-data-workflow)
 5. [Data Model & Schema](#6-data-model--schema)
-6. [ERD - Entity Relationship Diagram](#7-erd--entity-relationship-diagram) *(SQL projects)*
+6. [ERD - Entity Relationship Diagram](#7-erd--entity-relationship-diagram)
 7. [Analysis & Metrics](#8-analysis--metrics)
-8. [Recommendations](#10-recommendations)
-9. [Assumptions & Limitations](#11-assumptions--limitations)
-10. [Author](#14-author)
+8. [Assumptions & Limitations](#11-assumptions--limitations)
+9. [Author](#14-author)
 
 ---
 
@@ -148,117 +147,47 @@ Removing temporary columns after they were no longer required.
 ---
 
 ## 6. ERD - Entity Relationship Diagram
-### *(Primarily for SQL Projects - remove this section if not applicable)*
 
-<!--
-  An ERD shows how your tables connect to each other visually.
-  It is the fastest way for a reviewer to understand the data structure
-  of a SQL project without reading every query.
 
-  HOW TO INCLUDE YOUR ERD:
-  Option A - Image embed (most common):
-    Export your ERD from dbdiagram.io, DBeaver, Lucidchart, or similar.
-    Save to /visuals/erd.png and reference it below.
+COMPANIES
 
-  Option B - dbdiagram.io code block (version-controllable):
-    Paste your schema definition code directly in the fenced block below.
-    Anyone can paste it into dbdiagram.io to regenerate the visual.
+        ┌─────────────────────────────┐
+        │ PK  company_id       int    │
+        │     company_name     string │
+        │     industry         string │
+        │     country          string │
+        │     location         string │
+        └──────────────┬──────────────┘
+                       │
+                       │ has
+                       │
+                       ▼
+              LAYOFF_EVENTS
+        ┌─────────────────────────────┐
+        │ PK  layoff_id        int    │
+        │ FK  company_id       int    │
+        │     date             date   │
+        │     total_laid_off   int    │
+        │     percentage_laid_off     │
+        │     stage            string │
+        │     funds_raised_millions   │
+        └─────────────────────────────┘
+        
+        
+COMPANIES → LAYOFF_EVENTS
+- One company can have multiple layoff events.
+  
+- companies.company_id is the Primary Key (PK).
+  
+- layoff_events.company_id is the Foreign Key (FK).
 
-  Option C - Mermaid diagram (renders natively in GitHub):
-    Use the mermaid code block syntax below.
-    GitHub will render this as a diagram automatically.
+- This creates a one-to-many relationship.
 
-  PICK ONE. Don't use all three. Delete the options you don't use.
--->
+  ---
 
-### Option A - Embedded Image
-![ERD Diagram](visuals/erd.png)
-*[Brief caption: e.g., "Three-table schema - orders, customers, and products joined on shared IDs."]*
-
----
-
-### Option B - dbdiagram.io Schema Definition
-```
-Table orders {
-  order_id    int     [pk]
-  customer_id int     [ref: > customers.customer_id]
-  product_id  int     [ref: > products.product_id]
-  order_date  date
-  amount      float
-}
-
-Table customers {
-  customer_id int  [pk]
-  region_code string
-  signup_date date
-}
-
-Table products {
-  product_id   int    [pk]
-  category     string
-  unit_price   float
-}
-```
-*Paste this into [dbdiagram.io](https://dbdiagram.io) to view the visual.*
-
----
-
-### Option C - Mermaid Diagram *(renders on GitHub)*
-```mermaid
-erDiagram
-    ORDERS {
-        int order_id PK
-        int customer_id FK
-        int product_id FK
-        date order_date
-        float amount
-    }
-    CUSTOMERS {
-        int customer_id PK
-        string region_code
-        date signup_date
-    }
-    PRODUCTS {
-        int product_id PK
-        string category
-        float unit_price
-    }
-    ORDERS ||--o{ CUSTOMERS : "placed by"
-    ORDERS ||--o{ PRODUCTS : "contains"
-```
-
----
-
-**Table Relationships Summary:**
-
-| Relationship | Join Key | Type |
-|-------------|----------|------|
-| `orders` → `customers` | `customer_id` | Many-to-One |
-| `orders` → `products` | `product_id` | Many-to-One |
-| [Add rows as needed] | | |
-
----
 
 ## 7. Analysis & Metrics
 
-<!--
-  Explain what you measured and how - before you share what you found.
-
-  WHAT GOOD LOOKS LIKE:
-  Metric: "Customer Return Rate"
-  Definition: "Number of transactions flagged as returns divided by total
-               transactions, calculated at product-category and regional grain."
-  Why It Matters: "Return rate - not sales volume - was hypothesised to
-                  explain regional revenue gaps. This metric tests that hypothesis."
-
-
-            
-  WHAT TO AVOID:
-  ❌ Defining a metric only in code: SUM(returns) / COUNT(transaction_id)
-     That's an implementation. Write the plain-language definition here.
-     Both belong in your project - the definition in the README,
-     the implementation in the code.
--->
 
 ### Analytical Approach
 
@@ -297,18 +226,7 @@ Why It Matter
 
 ---
 
-## 8. **Recommendations**
--->
-
-| Priority | Recommendation | Based On | Suggested Owner |
-|----------|---------------|----------|-----------------|
-| High | [Specific, actionable step] | [Insight it comes from] | [Who should act] |
-| Medium | [Specific, actionable step] | [Insight it comes from] | [Who should act] |
-| Low | [Exploratory or longer-term suggestion] | [Insight it comes from] | [Who should act] |
-
----
-
-## 9. Assumptions & Limitations
+## 8. Assumptions & Limitations
 
 
 ### Assumptions
@@ -344,24 +262,16 @@ Why It Matter
 This project demonstrates more than basic SQL querying. It shows the ability to work with messy real-world data, protect raw data, create staging tables, identify and resolve data-quality issues, validate transformations, and prepare a dataset for downstream analysis.
 The most important lesson from the project was that data cleaning is an iterative process. Not every missing value should be filled, not every unusual record should be deleted, and every transformation needs to be validated before it is applied. That decision-making process is just as important as knowing the SQL syntax.
 
-## 10. Deliverables
-
-| Deliverable | Description | Location |
-|-------------|-------------|----------|
-| [Name] | [What it contains] | [`/path/to/file`] |
-| [Name] | [What it contains] | [`/path/to/file`] |
-| [Name] | [What it contains] | [`/path/to/file`] |
 
 ---
 
-## 14. Author
+## 9. Author
 
-**[Your Name]**
-[Your role or title - current or target]
+**Adewole Fakoya**
+[MySQL Data Analyst]
 
-- 🔗 [LinkedIn URL]
-- 💼 [Portfolio or GitHub profile URL]
-- 📧 [Email - optional]
+- 🔗 [https://www.linkedin.com/in/adewole-fakoya-7484a5149]
+- 📧 [Adewolewa@gmail.com]
 
 ---
 
