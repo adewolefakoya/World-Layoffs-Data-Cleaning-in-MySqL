@@ -1,9 +1,9 @@
-*SELECT 
+SELECT 
     company,
     SUM(total_laid_off) AS total_layoffs
 FROM layoffs_staging2
 WHERE total_laid_off IS NOT NULL
 GROUP BY company
-ORDER BY total_layoffs DESC*
+ORDER BY total_layoffs DESC
 
-**Question answered: Which companies had the highest total number of employees laid off?**
+*Question answered: Which companies had the highest total number of employees laid off?*
