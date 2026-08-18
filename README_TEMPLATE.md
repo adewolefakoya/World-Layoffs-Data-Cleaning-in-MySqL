@@ -356,7 +356,7 @@ erDiagram
 - Standardized categories such as Crypto were treated as equivalent when the original labels clearly represented the same concept.
 
 - Records missing both total_laid_off and percentage_laid_off were considered unsuitable for the planned layoff-focused analysis.
-- 
+  
 ### Limitations
 
 - The dataset contains missing values that could not be reliably recovered from the available information.
@@ -378,7 +378,6 @@ erDiagram
 
 This project demonstrates more than basic SQL querying. It shows the ability to work with messy real-world data, protect raw data, create staging tables, identify and resolve data-quality issues, validate transformations, and prepare a dataset for downstream analysis.
 The most important lesson from the project was that data cleaning is an iterative process. Not every missing value should be filled, not every unusual record should be deleted, and every transformation needs to be validated before it is applied. That decision-making process is just as important as knowing the SQL syntax.
----
 
 ## 13. Deliverables
 
