@@ -138,9 +138,11 @@ Removing temporary columns after they were no longer required.
 | `country` |  VARCHAR  / Text | Country associated with the company | Brazil |
 | `funds_raised_millions` | Decimal  / Float | Total funding raised by the company in millions | 500 |
 
-Approximate initial row count: 2,361 records
-Date range: Approximately 2020–2023
-Key relationship: No relational joins were required because the project was based primarily on a single layoffs dataset. A self-join on company and location was used during cleaning to populate missing industry values.
+**Approximate initial row count**: 2,361 records
+
+**Date rang**e: Approximately 2020–2023
+
+**Key relationship**: No relational joins were required because the project was based primarily on a single layoffs dataset. A self-join on company and location was used during cleaning to populate missing industry values.
 
 ---
 
