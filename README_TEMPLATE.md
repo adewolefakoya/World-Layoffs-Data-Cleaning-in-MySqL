@@ -37,15 +37,12 @@
 **Context:**
 This project was created to practice cleaning and preparing a real-world layoffs dataset for analysis. The raw dataset contained inconsistencies such as duplicate records, inconsistent naming, missing values, incorrect formatting, and unnecessary records. Before using the data for exploratory analysis, I needed to make sure it was as consistent and reliable as possible.
 
-Approach:
+**Approach**
 I imported the raw layoffs dataset into MySQL and created a separate staging table so the original data remained untouched. I then worked through the data systematically by removing duplicates, standardizing inconsistent values, handling missing information, converting data types, and removing records and columns that were not useful for the planned analysis.
 Outcome:
 
 **Problem Statement:**
 How can I transform a messy global layoffs dataset into a clean, structured dataset that can be confidently used for exploratory data analysis and visualization?
-
-**Approach:**
-I imported the raw layoffs dataset into MySQL and created a separate staging table so the original data remained untouched. I then worked through the data systematically by removing duplicates, standardizing inconsistent values, handling missing information, converting data types, and removing records and columns that were not useful for the planned analysis.
 
 **Outcome:** 
 I produced a cleaned and analysis-ready layoffs dataset. The project also gave me practical experience with SQL techniques such as ROW_NUMBER(), CTEs, JOINs, UPDATE, DELETE, TRIM(), STR_TO_DATE(), and ALTER TABLE, while following a workflow that reflects how data cleaning can be handled in a real analytics environment.
@@ -55,16 +52,16 @@ I produced a cleaned and analysis-ready layoffs dataset. The project also gave m
 
 **Primary Objective**
 Clean and standardize the global layoffs dataset so it can be reliably used for exploratory data analysis.
+
 **Secondary Objective 1**
 Identify and remove duplicate records without modifying the original raw dataset.
+
 **Secondary Objective 2**
 Standardize inconsistent values, missing fields, text formatting, and date formats to improve data quality.
+
 **Secondary Objective 3**
 Remove unusable records and temporary fields that could negatively affect future analysis.
 Every analysis decision in this project traces back to one of these objectives.
-
-
-> 💡 *Every analysis decision in this project traces back to one of these objectives.*
 
 ---
 
@@ -134,36 +131,63 @@ Removing temporary columns after they were no longer required.
   Define your fields so that someone reading your analysis can follow along
   without digging through your code.
 
-  WHAT GOOD LOOKS LIKE (one row example):
-  | transaction_id | string | Unique identifier per sales transaction | TXN-00482 |
-  | return_flag    | boolean | Whether the transaction included a return | TRUE |
-  | region_code    | string | Two-letter identifier for store region | "NE" |
+ Field Name
+Data Type
+Description
+Example Value
+company
+VARCHAR / Text
+Name of the company affected by layoffs
+Airbnb
+location
+VARCHAR / Text
+Location associated with the layoff
+San Francisco
+industry
+VARCHAR / Text
+Industry or business sector of the company
+Travel
+total_laid_off
+INT
+Number of employees laid off
+300
 
-  WHAT TO AVOID:
-  ❌ Skipping this section because "the field names are self-explanatory."
-     They're not. Not to a reviewer. Not to you in six months.
-
-  📌 FOR SQL PROJECTS: If you have multiple tables, create one block per table.
-     Describe join keys and relationships here. Your ERD (Section 7) will
-     visualise what this section describes in text.
-
-  📌 FOR NON-SQL PROJECTS: Describe the shape of your dataset informally
-     if a formal schema doesn't apply. Even one paragraph is more helpful than nothing.
--->
+DECIMAL / Float
+Percentage of the workforce laid off
+0.10
+date
+DATE
+Date the layoff was recorded
+2023-01-15
+stage
+VARCHAR / Text
+Funding or company stage
+Series B
+country
+VARCHAR / Text
+Country associated with the company
+United States
+funds_raised_millions
+DECIMAL / Float
+Total funding raised by the company in millions
 
 ### Dataset / Table: `[name]`
 
 | Field Name | Data Type | Description | Example Value |
 |------------|-----------|-------------|---------------|
-| `[field_1]` | [string / int / date / float / boolean] | [What this field represents] | [Non-sensitive example] |
-| `[field_2]` | [string / int / date / float / boolean] | [What this field represents] | [Non-sensitive example] |
-| `[field_3]` | [string / int / date / float / boolean] | [What this field represents] | [Non-sensitive example] |
+| `Company` | VARCHAR  / Text | Name of the company affected by layoffs | Airbnb |
+| `Location` | VARCHAR  / Text | Location associated with the layoff | Ibadan |
+| `Industry` | VARCHAR  / Text | Industry or business sector of the company | Travel |
+| `total_laid_off` | INT  | Numbers of employee laid off | 300 |
+| `percentage_laid_off` | Decimal  / Float | Percentage of the workforce laid off | 0.10 |
+| `date` | Date |Date the layoff was recorded | 2023-01-15 |
+| `stage` | VARCHAR  / Text | Funding or company stage | Series B |
+| `country` |  VARCHAR  / Text | Country associated with the company | Brazil |
+| `funds_raised_millions` | Decimal  / Float | Total funding raised by the company in millions | 500 |
 
-> **Row count (approx.):** [X rows]
-> **Date range:** [Start] – [End]
-> **Key join / relationship:** [e.g., `orders.customer_id` → `customers.id`]
-
-*Add additional table blocks as needed for multi-table projects.*
+Approximate initial row count: 2,361 records
+Date range: Approximately 2020–2023
+Key relationship: No relational joins were required because the project was based primarily on a single layoffs dataset. A self-join on company and location was used during cleaning to populate missing industry values.
 
 ---
 
