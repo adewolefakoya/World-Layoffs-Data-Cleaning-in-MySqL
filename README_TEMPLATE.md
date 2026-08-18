@@ -345,34 +345,39 @@ erDiagram
 
 ## 11. Assumptions & Limitations
 
-<!--
-  WHAT GOOD LOOKS LIKE:
-  Assumption: "Transaction records were assumed to be complete for all five regions.
-               No validation was performed against source system record counts."
-  Limitation: "The analysis cannot distinguish between returns initiated by
-               the customer vs. returns initiated by the business (e.g., recalls).
-               If business-initiated returns are concentrated in Region A, the
-               return rate finding may reflect a policy decision, not a quality issue."
-
-  WHAT TO AVOID:
-  ❌ Leaving this section blank or writing "None known."
-     Every project has limitations. Documenting them is a sign of
-     analytical maturity - not a confession of failure.
--->
 
 ### Assumptions
-- [What did you treat as true without being able to verify?]
-- [What simplifications did you make for scope or feasibility?]
-- [What domain rules or definitions did you accept as given?]
+- The source dataset was treated as a reasonable representation of reported layoffs during the period covered.
 
+- Records with identical values across all relevant fields were treated as duplicates.
+
+- Matching company + location was considered sufficient to identify the correct industry when another record contained a populated value.
+
+- Standardized categories such as Crypto were treated as equivalent when the original labels clearly represented the same concept.
+
+- Records missing both total_laid_off and percentage_laid_off were considered unsuitable for the planned layoff-focused analysis.
+- 
 ### Limitations
-- [What gaps exist in the data?]
-- [What analysis was out of scope but could affect interpretation?]
-- [What would a more rigorous version of this project include?]
-- [Are there known biases in the data source or collection method?]
 
-> *The goal here is pre-emptive Q&A. What would a thoughtful skeptic push back on? Document the answer here, before they ask.*
+- The dataset contains missing values that could not be reliably recovered from the available information.
 
+- Some companies may have incomplete or inconsistent reporting.
+
+- The dataset does not provide enough information to accurately calculate missing layoffs or funding values without external sources.
+
+- Removing records with missing layoff values improves analytical usability, but it may also remove legitimate observations and potentially introduce selection bias.
+
+- The project focused on data cleaning, so no statistical testing, predictive modeling, or advanced business analysis was performed at this stage.
+
+- The original dataset’s collection methodology and completeness were not independently verified.
+
+- A more rigorous production workflow could include automated data-quality checks, validation rules, logging, version-controlled SQL scripts, and automated ETL pipelines.
+
+
+**Portfolio Takeaway**
+
+This project demonstrates more than basic SQL querying. It shows the ability to work with messy real-world data, protect raw data, create staging tables, identify and resolve data-quality issues, validate transformations, and prepare a dataset for downstream analysis.
+The most important lesson from the project was that data cleaning is an iterative process. Not every missing value should be filled, not every unusual record should be deleted, and every transformation needs to be validated before it is applied. That decision-making process is just as important as knowing the SQL syntax.
 ---
 
 ## 13. Deliverables
