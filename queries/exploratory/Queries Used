@@ -8,7 +8,7 @@ ORDER BY total_layoffs DESC;
 
 Question answered: Which companies had the highest total number of employees laid off?
 
----
+----
 
 SELECT 
     company,
@@ -22,7 +22,7 @@ ORDER BY total_laid_off DESC;
 
 Question answered: Which companies reported eliminating their entire workforce?
 
----
+----
 
 SELECT 
     country,
@@ -33,3 +33,54 @@ GROUP BY country
 ORDER BY total_layoffs DESC;
 
 Question answered: Which countries were most affected?
+
+----
+
+SELECT 
+    industry,
+    SUM(total_laid_off) AS total_layoffs
+FROM layoffs_staging2
+WHERE total_laid_off IS NOT NULL
+GROUP BY industry
+ORDER BY total_layoffs DESC;
+
+Question answered: Which industries experienced the most layoffs?
+
+
+----
+
+
+WITH company_yearly_layoffs AS (
+    SELECT
+        company,
+        YEAR(date) AS year,
+        SUM(total_laid_off) AS total_layoffs
+    FROM layoffs_staging2
+    WHERE date IS NOT NULL
+      AND total_laid_off IS NOT NULL
+    GROUP BY company, YEAR(date)
+),
+
+ranked_companies AS (
+    SELECT
+        company,
+        year,
+        total_layoffs,
+        DENSE_RANK() OVER (
+            PARTITION BY year
+            ORDER BY total_layoffs DESC
+        ) AS ranking
+    FROM company_yearly_layoffs
+)
+
+SELECT
+    company,
+    year,
+    total_layoffs,
+    ranking
+FROM ranked_companies
+WHERE ranking <= 5
+ORDER BY year, ranking;
+
+
+Question answered: Which companies had the highest layoffs each year?
