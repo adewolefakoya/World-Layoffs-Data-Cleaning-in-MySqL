@@ -6,8 +6,8 @@
 ## ⚙️ Project Type Flags
 > *Check what applies. This helps reviewers and collaborators understand the nature of the work at a glance. Delete this block before publishing.*
 
-- [ ] Exploratory Data Analysis (EDA)
-- [ ] SQL Analysis / Querying
+- [x] Exploratory Data Analysis (EDA)
+- [x] SQL Analysis / Querying
 
 ---
 
@@ -15,14 +15,13 @@
 1. [Project Overview](#1-project-overview)
 2. [Objectives](#2-objectives)
 3. [Project Scope & Tools](#3-project-scope--tools)
-5. [Data Workflow](#5-data-workflow)
-6. [Data Model & Schema](#6-data-model--schema)
-7. [ERD - Entity Relationship Diagram](#7-erd--entity-relationship-diagram) *(SQL projects)*
-8. [Analysis & Metrics](#8-analysis--metrics)
-9. [Key Insights](#9-key-insights)
-10. [Recommendations](#10-recommendations)
-11. [Assumptions & Limitations](#11-assumptions--limitations)
-14. [Author](#14-author)
+4. [Data Workflow](#5-data-workflow)
+5. [Data Model & Schema](#6-data-model--schema)
+6. [ERD - Entity Relationship Diagram](#7-erd--entity-relationship-diagram) *(SQL projects)*
+7. [Analysis & Metrics](#8-analysis--metrics)
+8. [Recommendations](#10-recommendations)
+9. [Assumptions & Limitations](#11-assumptions--limitations)
+10. [Author](#14-author)
 
 ---
 
@@ -43,7 +42,7 @@ I produced a cleaned and analysis-ready layoffs dataset. The project also gave m
 
 ---
 
-## 2. Objectives
+## 2. **Objectives**
 
 **Primary Objective**
 Clean and standardize the global layoffs dataset so it can be reliably used for exploratory data analysis.
@@ -60,7 +59,7 @@ Every analysis decision in this project traces back to one of these objectives.
 
 ---
 
-## 3. Project Scope & Tools
+## 3. **Project Scope & Tools**
 
 ### Scope
 
@@ -84,7 +83,7 @@ Every analysis decision in this project traces back to one of these objectives.
 
 ---
 
-## 5. Data Workflow
+## 4. **Data Workflow**
 
 1. **Source:**
    The project used a real-world global layoffs dataset provided as a CSV file. The dataset contained approximately 2,361 records before cleaning and included information about companies, locations, industries, layoffs, dates, company stages, countries, and funding.
@@ -118,9 +117,11 @@ Removing temporary columns after they were no longer required.
 5. **Output:**
      The final output was a cleaned staging table containing standardized, analysis-ready layoffs data. This dataset is intended to serve as the foundation for the next stage of the project: exploratory data analysis and visualization.
 
+
 ---
 
-## 6. Data Model & Schema
+
+## 5.Data Model & Schema
 
 
 
@@ -146,7 +147,7 @@ Removing temporary columns after they were no longer required.
 
 ---
 
-## 7. ERD - Entity Relationship Diagram
+## 6. ERD - Entity Relationship Diagram
 ### *(Primarily for SQL Projects - remove this section if not applicable)*
 
 <!--
@@ -238,7 +239,7 @@ erDiagram
 
 ---
 
-## 8. Analysis & Metrics
+## 7. Analysis & Metrics
 
 <!--
   Explain what you measured and how - before you share what you found.
@@ -250,6 +251,8 @@ erDiagram
   Why It Matters: "Return rate - not sales volume - was hypothesised to
                   explain regional revenue gaps. This metric tests that hypothesis."
 
+
+            
   WHAT TO AVOID:
   ❌ Defining a metric only in code: SUM(returns) / COUNT(transaction_id)
      That's an implementation. Write the plain-language definition here.
@@ -259,80 +262,42 @@ erDiagram
 
 ### Analytical Approach
 
-[Describe how you approached the analysis. Were you exploring patterns? Testing a hypothesis? Building and validating a pipeline? Be honest about your method - exploratory work is valid, just call it that.]
+This phase was primarily exploratory data preparation rather than predictive analysis. The main objective was to understand the structure and quality of the dataset, identify data-quality problems, and resolve issues that could affect future analysis.
+
+The process involved inspecting distinct values, checking for duplicates, identifying missing values, testing assumptions, and validating changes before applying updates or deletes.
+
+A key principle throughout the project was:
+
+Inspect → Test → Validate → Update
+
+For example, instead of immediately deleting records, I first used SELECT queries to identify what would be affected and then converted the logic into DELETE or UPDATE statements after validating the results.
+
+Metric
+Plain-Language Definition
+Why It Matter
+
+
 
 ### Key Metrics Defined
 
 | Metric | Plain-Language Definition | Why It Matters |
 |--------|--------------------------|----------------|
-| `[Metric 1]` | [What it measures, in one sentence] | [What decision or question it answers] |
-| `[Metric 2]` | [What it measures, in one sentence] | [What decision or question it answers] |
-| `[Metric 3]` | [What it measures, in one sentence] | [What decision or question it answers] |
+| Total Laid Off | Number of employees reported as laid off in a record | Core measure for understanding the scale of layoffs |
+| Percentage Laid Off`| Percentage of the company’s workforce affected | Helps compare the relative impact across companies |
+| Funds Raised (Millions) | Amount of funding a company had raised, expressed in millions | Can provide context for understanding companies experiencing layoffs |
 
 ### Methods Used
 
-- [e.g., Descriptive statistics - distribution, central tendency, outlier detection]
-- [e.g., Trend analysis across [time period]]
-- [e.g., Segmentation / group comparison by [dimension]]
-- [e.g., Correlation analysis between [variable A] and [variable B]]
-- [e.g., SQL window functions for [specific aggregation]]
-- [e.g., Custom aggregation or transformation logic in [tool]]
+- **Data-quality profiling** — inspected distinct values, nulls, blanks, duplicates, and inconsistent categories.
+- **Duplicate detection** — used ROW_NUMBER() with PARTITION BY.
+- **Data standardization** — used TRIM(), pattern matching, and targeted UPDATE statements.
+- **Missing-value analysis** — compared records within the same company and location to determine whether values could be safely populated.
+- **Date transformation** — converted text dates into a proper SQL DATE format using STR_TO_DATE().
+- **Data reduction** — removed records that lacked the key layoff measures required for the planned analysis
 
 ---
 
-## 9. Key Insights
-
-<!--
-  Findings + implications. Not just what happened - what it means.
-
-  WHAT GOOD LOOKS LIKE:
-  ✅ "Return rates, not sales volume, explain Region A's underperformance.
-      Region A's return rate on home goods was 34% - more than double the
-      company average. Revenue was not lost at the point of sale; it was
-      lost post-sale through refunds. This points to a fulfilment or
-      product quality issue specific to that region, not a demand problem."
-
-  WHAT TO AVOID:
-  ❌ "Region A had lower revenue than other regions in Q4."
-     (That's an observation. It describes what happened.
-      An insight says what it means and where to look next.)
-
-  Aim for 3–6 insights. Quality over quantity.
--->
-
-**Insight 1: [Short descriptive headline]**
-[What you found + what it suggests. One short paragraph.]
-
-**Insight 2: [Short descriptive headline]**
-[What you found + what it suggests.]
-
-**Insight 3: [Short descriptive headline]**
-[What you found + what it suggests.]
-
-**Insight 4 (if applicable): [Short descriptive headline]**
-[What you found + what it suggests.]
-
----
-
-## 10. Recommendations
-
-<!--
-  Action-oriented. Addressed to a real audience.
-  Tied explicitly to the insight that supports each one.
-
-  WHAT GOOD LOOKS LIKE:
-  Priority: High
-  Recommendation: "Conduct a fulfilment audit for home goods deliveries
-                   in Region A - specifically investigating whether returns
-                   correlate with a particular warehouse, carrier, or SKU batch."
-  Based On: Insight 1 - return rate anomaly in Region A
-  Owner: Operations / Supply Chain team
-
-  WHAT TO AVOID:
-  ❌ "Improve the return rate."
-     (Not actionable. Doesn't say who, how, or where to start.)
-  ❌ "Further analysis is needed."
-     (This is a placeholder, not a recommendation.)
+## 8. **Recommendations**
 -->
 
 | Priority | Recommendation | Based On | Suggested Owner |
@@ -343,7 +308,7 @@ erDiagram
 
 ---
 
-## 11. Assumptions & Limitations
+## 9. Assumptions & Limitations
 
 
 ### Assumptions
@@ -379,7 +344,7 @@ erDiagram
 This project demonstrates more than basic SQL querying. It shows the ability to work with messy real-world data, protect raw data, create staging tables, identify and resolve data-quality issues, validate transformations, and prepare a dataset for downstream analysis.
 The most important lesson from the project was that data cleaning is an iterative process. Not every missing value should be filled, not every unusual record should be deleted, and every transformation needs to be validated before it is applied. That decision-making process is just as important as knowing the SQL syntax.
 
-## 13. Deliverables
+## 10. Deliverables
 
 | Deliverable | Description | Location |
 |-------------|-------------|----------|
