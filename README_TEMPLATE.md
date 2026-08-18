@@ -8,12 +8,6 @@
 
 - [ ] Exploratory Data Analysis (EDA)
 - [ ] SQL Analysis / Querying
-- [ ] Dashboard / Data Visualization
-- [ ] Data Pipeline / ETL
-- [ ] Predictive Modelling / Machine Learning
-- [ ] Data Cleaning / Wrangling
-- [ ] End-to-End (multiple of the above)
-- [ ] Other: ___________
 
 ---
 
@@ -46,6 +40,7 @@ How can I transform a messy global layoffs dataset into a clean, structured data
 
 **Outcome:** 
 I produced a cleaned and analysis-ready layoffs dataset. The project also gave me practical experience with SQL techniques such as ROW_NUMBER(), CTEs, JOINs, UPDATE, DELETE, TRIM(), STR_TO_DATE(), and ALTER TABLE, while following a workflow that reflects how data cleaning can be handled in a real analytics environment.
+
 ---
 
 ## 2. Objectives
@@ -127,49 +122,7 @@ Removing temporary columns after they were no longer required.
 
 ## 6. Data Model & Schema
 
-<!--
-  Define your fields so that someone reading your analysis can follow along
-  without digging through your code.
 
- Field Name
-Data Type
-Description
-Example Value
-company
-VARCHAR / Text
-Name of the company affected by layoffs
-Airbnb
-location
-VARCHAR / Text
-Location associated with the layoff
-San Francisco
-industry
-VARCHAR / Text
-Industry or business sector of the company
-Travel
-total_laid_off
-INT
-Number of employees laid off
-300
-
-DECIMAL / Float
-Percentage of the workforce laid off
-0.10
-date
-DATE
-Date the layoff was recorded
-2023-01-15
-stage
-VARCHAR / Text
-Funding or company stage
-Series B
-country
-VARCHAR / Text
-Country associated with the company
-United States
-funds_raised_millions
-DECIMAL / Float
-Total funding raised by the company in millions
 
 ### Dataset / Table: `[name]`
 
