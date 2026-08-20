@@ -17,7 +17,7 @@
 3. [Project Scope & Tools](#3-project-scope--tools)
 4. [Data Workflow](#4-data-workflow)
 5. [Data Model & Schema](#5-data-model--schema)
-6. [ERD - Entity Relationship Diagram](#6-erd--entity-relationship-diagram)
+6. [ERD - Entity Relationship Diagram](#6-erd---entity-relationship-diagram)
 7. [Analysis & Metrics](#7-analysis--metrics)
 8. [Assumptions & Limitations](#8-assumptions--limitations)
 9. [Author](#9-author)
@@ -120,7 +120,7 @@ Removing temporary columns after they were no longer required.
 ---
 
 
-## 5.Data Model & Schema
+## 5. Data Model & Schema
 
 
 
